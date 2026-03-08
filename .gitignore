@@ -1,0 +1,23 @@
+# Binary
+numer
+__debug_bin*
+
+# Test output
+*.test
+*.out
+
+# Go workspace
+vendor/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# numer sheets (local scratch files)
+*.nm
+
+# Claude local settings
+.claude/

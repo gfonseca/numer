@@ -1,0 +1,28 @@
+package main
+
+import (
+	"fmt"
+	"os"
+
+	tea "github.com/charmbracelet/bubbletea"
+	"numer/internal/ui"
+)
+
+func main() {
+	filename := ""
+	if len(os.Args) > 1 {
+		filename = os.Args[1]
+	}
+
+	m, err := ui.New(filename)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "numer: %v\n", err)
+		os.Exit(1)
+	}
+
+	p := tea.NewProgram(m, tea.WithAltScreen())
+	if _, err := p.Run(); err != nil {
+		fmt.Fprintf(os.Stderr, "numer: %v\n", err)
+		os.Exit(1)
+	}
+}
