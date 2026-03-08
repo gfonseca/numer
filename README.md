@@ -2,14 +2,7 @@
 
 A terminal calculator inspired by [Numi](https://numi.app) and [Soulver](https://soulver.app). Write math expressions in a multi-line editor and see results instantly.
 
-```
-  monthly = 4500                         monthly = 4500
-  tax = 0.15                             tax = 0.15
-  monthly * tax                          675
-  monthly - monthly * tax                3825
-  sqrt(monthly)                          67.0820393249
-  # take-home estimate                   (comment)
-```
+![numer screenshot](sample.png)
 
 ## Install
 

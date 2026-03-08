@@ -1,0 +1,50 @@
+# Home Monthly Budget
+# ───────────────────────────────────────
+
+// Income
+salary = 8500
+freelance = 1200
+total_income = salary + freelance
+
+// Housing
+rent = 2200
+condominium = 380
+internet = 120
+electricity = 95
+water = 40
+gas = 35
+total_housing = rent + condominium + internet + electricity + water + gas
+
+// Food
+supermarket = 600
+eating_out = 250
+total_food = supermarket + eating_out
+
+// Transport
+fuel = 180
+parking = 90
+car_insurance = 210
+total_transport = fuel + parking + car_insurance
+
+// Health
+health_plan = 320
+gym = 80
+pharmacy = 50
+total_health = health_plan + gym + pharmacy
+
+// Subscriptions
+streaming = 60
+cloud_storage = 10
+news = 15
+total_subscriptions = streaming + cloud_storage + news
+
+// Total expenses
+total_expenses = total_housing + total_food + total_transport + total_health + total_subscriptions
+
+// Summary
+balance = total_income - total_expenses
+savings_rate = balance / total_income * 100
+
+// Savings goal: 20% of income
+savings_goal = total_income * 0.20
+savings_gap = savings_goal - balance

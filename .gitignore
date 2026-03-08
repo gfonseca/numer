@@ -18,6 +18,7 @@ vendor/
 
 # numer sheets (local scratch files)
 *.nm
+!examples/*.nm
 
 # Claude local settings
 .claude/
