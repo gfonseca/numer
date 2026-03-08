@@ -1,4 +1,4 @@
-module numer
+module github.com/gfonseca/numer
 
 go 1.24.5
 

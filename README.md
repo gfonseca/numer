@@ -1,6 +1,6 @@
 # numer
 
-A terminal calculator inspired by [Numi](https://numi.app) and [Soulver](https://soulver.app). Write math expressions in a multi-line editor and see results instantly on the right.
+A terminal calculator inspired by [Numi](https://numi.app) and [Soulver](https://soulver.app). Write math expressions in a multi-line editor and see results instantly.
 
 ```
   monthly = 4500                         monthly = 4500
@@ -14,9 +14,15 @@ A terminal calculator inspired by [Numi](https://numi.app) and [Soulver](https:/
 ## Install
 
 ```sh
-git clone <repo>
+go install github.com/gfonseca/numer@latest
+```
+
+Or build from source:
+
+```sh
+git clone https://github.com/gfonseca/numer
 cd numer
-GOPROXY=direct go build -o numer .
+go build -o numer .
 ```
 
 ## Usage
@@ -133,24 +139,3 @@ salary = 5000
 rent = 1200
 salary - rent
 ```
-
-## Syntax Highlighting
-
-| Token      | Color         |
-|------------|---------------|
-| Numbers    | Gold          |
-| Operators  | Coral         |
-| Functions  | Green         |
-| Constants  | Amber         |
-| Variables  | Lavender      |
-| Parens     | Orange        |
-| Comments   | Purple        |
-| Results    | Cyan          |
-| Errors     | Red           |
-
-## Tech
-
-- **Language**: Go 1.24
-- **TUI**: [Bubble Tea](https://github.com/charmbracelet/bubbletea)
-- **Styling**: [Lip Gloss](https://github.com/charmbracelet/lipgloss)
-- **Parser**: hand-rolled recursive descent (no external eval library)

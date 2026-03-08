@@ -8,7 +8,7 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"numer/internal/eval"
+	"github.com/gfonseca/numer/internal/eval"
 )
 
 const (
