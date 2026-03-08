@@ -1,0 +1,49 @@
+numer — TODO
+============
+
+Done
+----
+
+[x] Multi-line text editor (nano-style navigation)
+[x] Live expression evaluation per line
+[x] Result column on the right
+[x] Centered layout with horizontal padding
+[x] Striped odd-line background
+[x] Arithmetic operators: + - * / % ^
+[x] Operator precedence and grouping with parentheses
+[x] Right-associative power (2^3^2 = 512)
+[x] Unary minus / plus
+[x] Built-in math functions: sqrt, abs, floor, ceil, round,
+    sin, cos, tan, asin, acos, atan, atan2, log, ln, log2,
+    log10, exp, pow, max, min, sum
+[x] Built-in constants: pi, e, tau, phi
+[x] User-defined variables (case-insensitive)
+[x] `last` variable (result of previous line)
+[x] Comments with # and //
+[x] Error indicator (✗) for invalid expressions
+[x] Undo / Redo (Ctrl+Z / Ctrl+Y, up to 100 snapshots)
+[x] File persistence — open and save .nm files
+[x] Save-as prompt for untitled sessions (Ctrl+S)
+[x] Safe path handling (~ expansion, null bytes, parent dir check)
+[x] Dirty indicator in status bar
+[x] Syntax highlighting: numbers, operators, functions,
+    constants, variables, parentheses, comments
+[x] Horizontal scroll for long lines
+[x] Home / End / PgUp / PgDn navigation
+[x] Ctrl+K kill to end of line
+[x] go install support (module path github.com/gfonseca/numer)
+[x] Example sheet: home expenses budget
+
+Ideas
+-----
+
+[ ] Multiple cursors / column selection
+[ ] Hex / binary / octal number literals (0xff, 0b1010)
+[ ] Unit conversions (km to miles, kg to lb, etc.)
+[ ] Sum of a range of lines
+[ ] Export results to plain text or CSV
+[ ] Search / jump to line
+[ ] Configurable result column width
+[ ] Configurable color theme
+[ ] Mouse support (click to position cursor)
+[ ] Open recent files
