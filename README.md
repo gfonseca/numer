@@ -132,3 +132,23 @@ salary = 5000
 rent = 1200
 salary - rent
 ```
+
+### sum-total
+
+Type `sum-total` on any line to draw a separator and display the running total of all numeric results above it. The accumulator resets after each `sum-total`, so you can use it multiple times in the same sheet without double-counting.
+
+```
+# January
+rent = 1200
+groceries = 300
+utilities = 150
+sum-total           →  1650
+
+# February
+rent = 1200
+groceries = 280
+utilities = 140
+sum-total           →  1620
+```
+
+The `sum-total` keyword is case-insensitive. Its result is also stored in `last`.
