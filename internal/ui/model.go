@@ -34,6 +34,13 @@ var (
 				Background(lipgloss.Color("4")).
 				Foreground(lipgloss.Color("15")).
 				Bold(true)
+
+	styleSumTotalSep        = lipgloss.NewStyle().Foreground(lipgloss.Color("240"))
+	styleSumTotalSepOdd     = lipgloss.NewStyle().Foreground(lipgloss.Color("240")).Background(oddBgColor)
+	styleSumTotalLabel      = lipgloss.NewStyle().Foreground(lipgloss.Color("6"))
+	styleSumTotalLabelOdd   = lipgloss.NewStyle().Foreground(lipgloss.Color("6")).Background(oddBgColor)
+	styleSumTotalResult     = lipgloss.NewStyle().Foreground(lipgloss.Color("6")).Bold(true)
+	styleSumTotalResultOdd  = lipgloss.NewStyle().Foreground(lipgloss.Color("6")).Bold(true).Background(oddBgColor)
 )
 
 type snapshot struct {
@@ -465,7 +472,85 @@ func isComment(line string) bool {
 	return strings.HasPrefix(s, "#") || strings.HasPrefix(s, "//")
 }
 
+func isSumTotal(line string) bool {
+	return strings.ToLower(strings.TrimSpace(line)) == "sum-total"
+}
+
+func (m Model) renderSumTotalLine(i int) string {
+	isOdd := i%2 != 0
+	contentW := m.width - 2*hPad
+	exprW := contentW - resultColWidth - 1
+	if exprW < 5 {
+		exprW = contentW
+	}
+
+	sepStyle := styleSumTotalSep
+	labelStyle := styleSumTotalLabel
+	if isOdd {
+		sepStyle = styleSumTotalSepOdd
+		labelStyle = styleSumTotalLabelOdd
+	}
+
+	const label = " #TOTAL "
+	labelRunes := []rune(label)
+	labelLen := len(labelRunes)
+	leftDashes := (exprW - labelLen) / 2
+	if leftDashes < 0 {
+		leftDashes = 0
+	}
+	rightDashes := exprW - labelLen - leftDashes
+	if rightDashes < 0 {
+		rightDashes = 0
+	}
+
+	pos := 0
+	var sb strings.Builder
+
+	renderDash := func(count int) {
+		for range count {
+			if i == m.row && pos == m.col {
+				sb.WriteString(styleCursor.Render("─"))
+			} else {
+				sb.WriteString(sepStyle.Render("─"))
+			}
+			pos++
+		}
+	}
+	renderLabel := func() {
+		for _, ch := range labelRunes {
+			if i == m.row && pos == m.col {
+				sb.WriteString(styleCursor.Render(string(ch)))
+			} else {
+				sb.WriteString(labelStyle.Render(string(ch)))
+			}
+			pos++
+		}
+	}
+
+	renderDash(leftDashes)
+	renderLabel()
+	renderDash(rightDashes)
+	exprPart := sb.String()
+
+	if exprW == contentW {
+		return exprPart
+	}
+
+	resStyle := styleSumTotalResult
+	divStyle := lipgloss.NewStyle()
+	if isOdd {
+		resStyle = styleSumTotalResultOdd
+		divStyle = divStyle.Background(oddBgColor)
+	}
+	resPart := resStyle.Width(resultColWidth).Align(lipgloss.Right).Render(m.results[i])
+	return exprPart + divStyle.Render(" ") + resPart
+}
+
 func (m Model) renderLine(i int) string {
+	if isSumTotal(m.lines[i]) {
+		return m.renderSumTotalLine(i)
+	}
+
 	isOdd := i%2 != 0
 	isCmt := isComment(m.lines[i])
 	contentW := m.width - 2*hPad

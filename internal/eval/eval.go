@@ -457,7 +457,8 @@ func evalBuiltin(name string, args []float64) (float64, error) {
 
 // Evaluator evaluates lines sequentially, maintaining variable state.
 type Evaluator struct {
-	vars map[string]float64
+	vars       map[string]float64
+	pendingSum float64
 }
 
 func New() *Evaluator {
@@ -473,6 +474,7 @@ func (e *Evaluator) Reset() {
 		"tau": 2 * math.Pi,
 		"phi": (1 + math.Sqrt(5)) / 2,
 	}
+	e.pendingSum = 0
 }
 
 // EvalLine evaluates a single line, updating variables.
@@ -481,6 +483,13 @@ func (e *Evaluator) EvalLine(line string) (result, errMsg string) {
 	trimmed := strings.TrimSpace(line)
 	if trimmed == "" || strings.HasPrefix(trimmed, "#") || strings.HasPrefix(trimmed, "//") {
 		return "", ""
+	}
+
+	if strings.ToLower(trimmed) == "sum-total" {
+		total := e.pendingSum
+		e.pendingSum = 0
+		e.vars["last"] = total
+		return FormatNum(total), ""
 	}
 
 	if varName, exprStr, ok := detectAssignment(trimmed); ok {
@@ -494,6 +503,7 @@ func (e *Evaluator) EvalLine(line string) (result, errMsg string) {
 		}
 		e.vars[strings.ToLower(varName)] = v
 		e.vars["last"] = v
+		e.pendingSum += v
 		return varName + " = " + FormatNum(v), ""
 	}
 
@@ -506,6 +516,7 @@ func (e *Evaluator) EvalLine(line string) (result, errMsg string) {
 		return "", err.Error()
 	}
 	e.vars["last"] = v
+	e.pendingSum += v
 	return FormatNum(v), ""
 }
 
